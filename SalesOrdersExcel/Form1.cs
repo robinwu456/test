@@ -5,6 +5,15 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Threading;
 
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Text;
+
+using System.Reflection;
+using System.IO;
+using System.Data.OleDb;
+
 namespace SalesOrdersExcel {
     public partial class Form1 : Form {
 
@@ -19,6 +28,9 @@ namespace SalesOrdersExcel {
         List<string[]> productCountList = new List<string[]>();     //商品種數列表
 
         bool processPermit = true;
+
+        DataSet ds = new DataSet();
+        OleDbDataAdapter adapter = new OleDbDataAdapter();
 
         //richbox顯示商品種數列表
         public void PrintProductCountList() {
@@ -471,7 +483,6 @@ namespace SalesOrdersExcel {
                 ExcelWorking(excel,sheet);
                 sheet.Close(true, Type.Missing, Type.Missing);
                 excel.Quit();
-                Thread.Sleep(3000);
                 richTextBox1.AppendText("程序結束。\n");
 
                 //顯示種類清單
@@ -580,6 +591,124 @@ namespace SalesOrdersExcel {
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //path = Path.Combine(path, "9月原始檔.xlsx");
+            path = Path.Combine(path, "test.xlsx");
+
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
+                                        + path
+                                        + @";Extended Properties=""Excel 12.0 Macro;HDR=Yes; ImpoertMixedTypes=Text;TypeGuessRows=0""";
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+
+            //string strCmd = "Select * from [orders$A1:AB228]";
+            string strCmd = "Select * from [工作表1$]";
+
+            OleDbCommand cmd = new OleDbCommand(strCmd, connection);
+
+            try
+            {
+                connection.Open();
+                ds.Clear();
+                adapter.SelectCommand = cmd;
+                adapter.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+                Console.WriteLine("rows="+dataGridView1.Rows.Count);
+                Console.WriteLine("columns=" + dataGridView1.Columns.Count);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
+
+            Excel.Application xlapp = (Excel.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Excel.Application");
+            Excel.Workbook xlWorkbook = (Excel.Workbook)xlapp.ActiveWorkbook;
+            Excel.Worksheet xlWorksheet = (Excel.Worksheet)xlWorkbook.ActiveSheet;
+
+            Excel.Range chartRange = xlWorksheet.UsedRange;
+
+            for (int i = 0; i < 10; i++)
+            {
+                for(int j = 0; j < 1; j++)
+                {
+                    xlWorksheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                }
+            }
+
+        }
+
+        private void button7_Click(object sender, EventArgs e) {
+
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //path = Path.Combine(path, "9月原始檔.xlsx");
+            path = Path.Combine(path, "test.xlsx");
+
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
+                                        + path
+                                        + @";Extended Properties=""Excel 12.0 Macro;HDR=Yes; ImpoertMixedTypes=Text;TypeGuessRows=0""";
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+
+            //string strCmd = "Select * from [orders$A1:AB228]";
+            string strCmd = "Select * from [orders$]";
+
+            OleDbCommand cmd = new OleDbCommand(strCmd, connection);
+
+            try
+            {
+                connection.Open();
+                ds.Clear();
+                adapter.SelectCommand = cmd;
+                adapter.Fill(ds);
+                dataGridView1.DataSource = ds.Tables[0];
+                Console.WriteLine("rows=" + dataGridView1.Rows.Count);
+                Console.WriteLine("columns=" + dataGridView1.Columns.Count);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            Excel.Application xlapp = (Excel.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Excel.Application");
+            Excel.Workbook xlWorkbook = (Excel.Workbook)xlapp.ActiveWorkbook;
+            Excel.Worksheet xlWorksheet = (Excel.Worksheet)xlWorkbook.ActiveSheet;
+            //Excel.Worksheet xlWorksheet = xlapp
+            //Excel.Worksheet x = excel.ActiveSheet as Excel.Worksheet;
+
+            Excel.Range chartRange = xlWorksheet.UsedRange;
+
+            /*
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                {
+                    xlWorksheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                }
+            }
+            */
+
+            for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
+            {
+                xlWorksheet.Cells[i + 2, dataGridView1.Columns.Count + 1] = Int32.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString()) 
+                                                                            + Int32.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString());
+            }
 
         }
     }
