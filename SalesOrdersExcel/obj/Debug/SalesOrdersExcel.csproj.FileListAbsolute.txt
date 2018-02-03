@@ -1,0 +1,11 @@
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\bin\Debug\SalesOrdersExcel.exe.config
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\bin\Debug\SalesOrdersExcel.exe
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\bin\Debug\SalesOrdersExcel.pdb
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.csprojResolveAssemblyReference.cache
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.csproj.ResolveComReference.cache
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.Form1.resources
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.Properties.Resources.resources
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.csproj.GenerateResource.Cache
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.csproj.CoreCompileInputs.cache
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.exe
+c:\users\robin-pc\source\repos\SalesOrdersExcel\SalesOrdersExcel\obj\Debug\SalesOrdersExcel.pdb
