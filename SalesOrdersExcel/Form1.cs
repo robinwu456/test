@@ -171,7 +171,6 @@ namespace SalesOrdersExcel {
         public string[,] DownloadStoreCostForm(string path) {
 
             richTextBox1.AppendText("從 " + storeCostFormPath + " 下載成本表...\n");
-            MessageBox.Show("成本表下載");
             Excel.Application excel = new Excel.Application();
             Excel.Workbook sheet = excel.Workbooks.Open(storeCostFormPath);
             Excel.Worksheet x = excel.ActiveSheet as Excel.Worksheet;
@@ -216,7 +215,6 @@ namespace SalesOrdersExcel {
             {
                 richTextBox1.AppendText("錯誤資訊：" + excp.ToString() + "\n");
             }
-            MessageBox.Show("刪除成本");
             sheet.Close(true, Type.Missing, Type.Missing);
             excel.Quit();
             
@@ -467,12 +465,10 @@ namespace SalesOrdersExcel {
             }
             else
             {
-                MessageBox.Show("修改excel");
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook sheet = excel.Workbooks.Open(salesOrderFormPath);
 
                 ExcelWorking(excel,sheet);
-                MessageBox.Show("刪除修改excel");
                 sheet.Close(true, Type.Missing, Type.Missing);
                 excel.Quit();
                 Thread.Sleep(3000);
