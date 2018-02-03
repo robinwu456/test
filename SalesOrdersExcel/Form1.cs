@@ -542,12 +542,15 @@ namespace SalesOrdersExcel {
             richTextBox1.Text = string.Empty;
             productCountList.Clear();
 
+            /*
             CheckExcelProcess();
 
             if (processPermit)
             {
                 ExcelUpdata();
             }
+            */
+            ExcelUpdata();
         }
 
         //訂單瀏覽
