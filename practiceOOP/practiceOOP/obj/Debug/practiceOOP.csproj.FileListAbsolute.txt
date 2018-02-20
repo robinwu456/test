@@ -1,0 +1,7 @@
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\bin\Debug\practiceOOP.exe.config
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\bin\Debug\practiceOOP.exe
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\bin\Debug\practiceOOP.pdb
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\obj\Debug\practiceOOP.csprojResolveAssemblyReference.cache
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\obj\Debug\practiceOOP.csproj.CoreCompileInputs.cache
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\obj\Debug\practiceOOP.exe
+C:\Users\Robin-PC\source\repos\practiceOOP\practiceOOP\obj\Debug\practiceOOP.pdb

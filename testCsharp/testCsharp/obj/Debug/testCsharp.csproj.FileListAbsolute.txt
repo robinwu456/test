@@ -1,0 +1,10 @@
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\bin\Debug\testCsharp.exe.config
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\bin\Debug\testCsharp.exe
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\bin\Debug\testCsharp.pdb
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.csprojResolveAssemblyReference.cache
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.Form1.resources
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.Properties.Resources.resources
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.csproj.GenerateResource.Cache
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.csproj.CoreCompileInputs.cache
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.exe
+C:\Users\Robin-PC\source\repos\testCsharp\testCsharp\obj\Debug\testCsharp.pdb

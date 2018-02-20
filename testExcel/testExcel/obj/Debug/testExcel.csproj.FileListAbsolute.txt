@@ -1,0 +1,11 @@
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\bin\Debug\testExcel.exe.config
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\bin\Debug\testExcel.exe
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\bin\Debug\testExcel.pdb
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.csprojResolveAssemblyReference.cache
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.csproj.ResolveComReference.cache
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.Form1.resources
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.Properties.Resources.resources
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.csproj.GenerateResource.Cache
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.csproj.CoreCompileInputs.cache
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.exe
+C:\Users\Robin-PC\source\repos\testExcel\testExcel\obj\Debug\testExcel.pdb
