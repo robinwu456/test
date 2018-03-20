@@ -50,21 +50,21 @@ namespace SalesOrdersExcel {
                 }
 
                 spacetxt = (i + 1) < 10 ? ".    " : ".  ";
-                
+
                 richTextBox1.AppendText(" " + (i + 1) + spacetxt + productCountList[i][1] + "\t" + productCountList[i][0] + "\n");
             }
 
             richTextBox1.AppendText("\n");
 
             spacetxt = (totalProfit > 0) ? (" 總利潤：" + totalProfit + "\n") : (" 總利潤：有東西無成本，無法判斷\n");
- 
+
             richTextBox1.AppendText(spacetxt);
         }
 
         //計算商品數量
         public void ProductQuantityCount(string productName, int productOption, int productQuantity) {
 
-            int totalQuantity = productOption * productQuantity;            
+            int totalQuantity = productOption * productQuantity;
 
             if (productCountList.Count == 0)
             {
@@ -97,6 +97,8 @@ namespace SalesOrdersExcel {
         //切割商品資訊至字串陣列
         public string[] ProductInfoTransfer(string str) {
 
+            Console.WriteLine(str);
+
             string[] infos = str.Split(';');
 
             for (int i = 0; i < infos.Length; i++)
@@ -107,27 +109,16 @@ namespace SalesOrdersExcel {
                 }
                 else if (infos[i].Contains("商品選項名稱"))
                 {
-                    infos[i] = infos[i].Substring(infos[i].IndexOf(":") + 1).Replace("入", "");
+                    infos[i] = infos[i].Substring(infos[i].IndexOf(":") + 2).Replace("入", "");
 
                     if (!Int32.TryParse(infos[i], out int number))
                     {
                         string[] word = { "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
 
                         if (infos[i] == "兩") { infos[i] = "二"; }
-                        if (infos[i] == "") { infos[i] = "一"; }
 
                         //項目顯示其他處理為"一入"
-                        for (int j = 0; j < word.Length; j++)
-                        {
-                            if (infos[i] == word[j])
-                            {
-                                break;
-                            }
-                            else if (j == word.Length - 1)
-                            {
-                                infos[i] = "一";
-                            }
-                        }
+                        if (infos[i] == "" || !word.Contains<string>(infos[i])) { infos[i] = "一"; }
 
                         //幾入國字轉數字
                         for (int j = 0; j < word.Length; j++)
@@ -229,7 +220,7 @@ namespace SalesOrdersExcel {
             }
             sheet.Close(true, Type.Missing, Type.Missing);
             excel.Quit();
-            
+
             richTextBox1.AppendText("成本表下載完成\n");
 
             return form;
@@ -284,11 +275,11 @@ namespace SalesOrdersExcel {
                 else
                 {
                     //顯示商品各計算數字
-                    //Console.WriteLine("({0}-{1}*{2})*{3}", Int32.Parse(orderList[i][2]), ProductStoreCost(costForm, orderList[i][0]), Int32.Parse(orderList[i][1]), Int32.Parse(orderList[i][3]));
-                    //利潤 = (價格 - 成本 * 選項) * 數量
-                    profit += ((Int32.Parse(orderList[i][2]) - (ProductStoreCost(costForm, orderList[i][0]) * Int32.Parse(orderList[i][1])))) * Int32.Parse(orderList[i][3]);                    
+                    Console.WriteLine("({0} - {1} * {2}) * {3} = {4}", Int32.Parse(orderList[i][2]), ProductStoreCost(costForm, orderList[i][0]), Int32.Parse(orderList[i][1]), Int32.Parse(orderList[i][3]), ((Int32.Parse(orderList[i][2]) - (ProductStoreCost(costForm, orderList[i][0]) * Int32.Parse(orderList[i][1])))) * Int32.Parse(orderList[i][3]));
+                    //利潤 = (價格 - 成本 * 選項) * 數量                    
+                    profit += ((Int32.Parse(orderList[i][2]) - (ProductStoreCost(costForm, orderList[i][0]) * Int32.Parse(orderList[i][1])))) * Int32.Parse(orderList[i][3]);
                 }
-                
+
             }
 
             //計算手續費
@@ -302,7 +293,7 @@ namespace SalesOrdersExcel {
                 }
             }
 
-            //Console.WriteLine("fee = " + Convert.ToInt32(fee));
+            Console.WriteLine("單筆手續費 = " + Convert.ToInt32(fee));
 
             profit -= Convert.ToInt32(fee);
 
@@ -310,7 +301,7 @@ namespace SalesOrdersExcel {
 
             //利潤加總判斷
             TotalProfitCount(profit);
-
+            Console.WriteLine("單筆利潤 = "+profit.ToString());
             return profit;
         }
 
@@ -361,7 +352,7 @@ namespace SalesOrdersExcel {
             richTextBox1.AppendText("程序開始...\n");
 
             richTextBox1.AppendText("從 " + salesOrderFormPath + " 讀取訂單...\n");
-            
+
             Excel.Worksheet x = excel.ActiveSheet as Excel.Worksheet;
             richTextBox1.AppendText("name=" + x.Name + "\n");
             Excel.Range userRange = x.UsedRange;
@@ -398,6 +389,8 @@ namespace SalesOrdersExcel {
 
                 for (int testRows = 2; testRows <= userRange.Rows.Count; testRows++)
                 {
+                    Console.WriteLine("\n訂單編號：" + testRows.ToString());
+
                     if (testRows == 2)
                     {
                         x.Cells[1, userRange.Columns.Count + 1] = "利潤";
@@ -442,7 +435,7 @@ namespace SalesOrdersExcel {
         //測試
         public void Test() {
             /*
-            int testIndex = 2;      //測試第幾筆訂單
+            int testIndex = 85;      //測試第幾筆訂單
             string productInfoString = userRange.Cells[testIndex, productInfoIdx].value;
             string paymentMethodString = userRange.Cells[testIndex, paymentMethodIdx].value;
 
@@ -463,9 +456,9 @@ namespace SalesOrdersExcel {
 
             int profit = SingleOrderProfit(list, costForm, paymentMethodString);
 
-            //Console.WriteLine("profit = " + profit);
-            
+            Console.WriteLine("profit = " + profit);
             */
+
         }
 
         //修改Excel
@@ -480,7 +473,7 @@ namespace SalesOrdersExcel {
                 Excel.Application excel = new Excel.Application();
                 Excel.Workbook sheet = excel.Workbooks.Open(salesOrderFormPath);
 
-                ExcelWorking(excel,sheet);
+                ExcelWorking(excel, sheet);
                 sheet.Close(true, Type.Missing, Type.Missing);
                 excel.Quit();
                 richTextBox1.AppendText("程序結束。\n");
@@ -521,7 +514,7 @@ namespace SalesOrdersExcel {
                     PrintProductCountList();
                 }
             }
-        }              
+        }
 
         public Form1() {
             InitializeComponent();
@@ -532,9 +525,9 @@ namespace SalesOrdersExcel {
 
         public void CheckExcelProcess() {
 
-            foreach(System.Diagnostics.Process proc in System.Diagnostics.Process.GetProcesses())
+            foreach (System.Diagnostics.Process proc in System.Diagnostics.Process.GetProcesses())
             {
-                if(proc.ProcessName == "EXCEL")
+                if (proc.ProcessName == "EXCEL")
                 {
                     processPermit = false;
                     richTextBox1.AppendText("請關閉Excel");
@@ -618,7 +611,7 @@ namespace SalesOrdersExcel {
                 adapter.SelectCommand = cmd;
                 adapter.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
-                Console.WriteLine("rows="+dataGridView1.Rows.Count);
+                Console.WriteLine("rows=" + dataGridView1.Rows.Count);
                 Console.WriteLine("columns=" + dataGridView1.Columns.Count);
             }
             catch (Exception ex)
@@ -642,7 +635,7 @@ namespace SalesOrdersExcel {
 
             for (int i = 0; i < 10; i++)
             {
-                for(int j = 0; j < 1; j++)
+                for (int j = 0; j < 1; j++)
                 {
                     xlWorksheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
                 }
@@ -704,9 +697,9 @@ namespace SalesOrdersExcel {
             }
             */
 
-            for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
-                xlWorksheet.Cells[i + 2, dataGridView1.Columns.Count + 1] = Int32.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString()) 
+                xlWorksheet.Cells[i + 2, dataGridView1.Columns.Count + 1] = Int32.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString())
                                                                             + Int32.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString());
             }
 
